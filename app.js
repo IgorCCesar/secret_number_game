@@ -1,4 +1,4 @@
-let parameterGame = 10;
+let parameterGame = 20;
 
 function randomNumber(parameterGame) {
   return Math.floor(Math.random() * parameterGame + 1)
@@ -31,9 +31,9 @@ const kickVerification = () => {
         randomNumber()
     } else {
       if(kick > secretNumber) {
-        displayTextOnScreen(paragraph, `O número secreto é menor que ${kick}`)
+        displayTextOnScreen(paragraph, `O número secreto é menor que`)
       } else {
-        displayTextOnScreen(paragraph, `O número secreto é maior que ${kick}`)
+        displayTextOnScreen(paragraph, `O número secreto é maior que`)
       }
   }  
   } 
