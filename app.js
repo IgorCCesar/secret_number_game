@@ -1,4 +1,5 @@
-let parameterGame = 20;
+let parameterGame = 10;
+let attempt = 1
 
 function randomNumber(parameterGame) {
   return Math.floor(Math.random() * parameterGame + 1)
@@ -24,23 +25,29 @@ const kickVerification = () => {
   let kick = document.querySelector('input').value;
 
   if(kick <= 0 || kick > parameterGame) {
-    displayTextOnScreen(paragraph, 'O número digitado é invalido')
+    displayTextOnScreen(paragraph, 'O número digitado é invalido');
   } else {
       if(kick == secretNumber) {
-        displayTextOnScreen(title,`Parabéns! Você acertou o número secreto ${secretNumber}`)
-        randomNumber()
+        let wordAttempt = attempt > 1 ? 'tentativas' : 'tentativa';
+        let attemptMessage = `Parabéns! Você venceu o jogo com ${attempt} ${wordAttempt}`
+        document.querySelector('input').value = '';
+        displayTextOnScreen(paragraph, attemptMessage);
+        randomNumber();
+        document.getElementById('reiniciar').removeAttribute('disabled');
     } else {
       if(kick > secretNumber) {
-        displayTextOnScreen(paragraph, `O número secreto é menor que`)
+        displayTextOnScreen(paragraph, `O número secreto é menor que`);
       } else {
-        displayTextOnScreen(paragraph, `O número secreto é maior que`)
+        displayTextOnScreen(paragraph, `O número secreto é maior que`);
       }
+      attempt++
   }  
   } 
 };
 
 const newGame = () => {
-  document.querySelector('input').value = ''
-  displayTextOnScreen(paragraph, paragraphText)
-  secretNumber = randomNumber(parameterGame)  
-}
+  document.querySelector('input').value = '';
+  document.getElementById('reiniciar').setAttribute('disabled', 'disabled')
+  displayTextOnScreen(paragraph, paragraphText);
+  secretNumber = randomNumber(parameterGame);
+};
