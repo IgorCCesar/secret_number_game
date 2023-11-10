@@ -27,7 +27,7 @@ const kickVerification = () => {
     displayTextOnScreen(paragraph, 'O número digitado é invalido')
   } else {
       if(kick == secretNumber) {
-        displayTextOnScreen(paragraph,`Parabéns! Você acertou o número secreto ${secretNumber}` )
+        displayTextOnScreen(title,`Parabéns! Você acertou o número secreto ${secretNumber}`)
         randomNumber()
     } else {
       if(kick > secretNumber) {
