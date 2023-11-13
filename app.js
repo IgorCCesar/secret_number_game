@@ -1,8 +1,8 @@
 let parameterGame = 10;
-let attempt = 1
+let attempt = 1;
 
 function randomNumber(parameterGame) {
-  return Math.floor(Math.random() * parameterGame + 1)
+  return Math.floor(Math.random() * parameterGame + 1);
 };
 
 let secretNumber = randomNumber(parameterGame);
@@ -15,7 +15,19 @@ const paragraphText = `Escolha um número entre 1 e ${parameterGame}`;
 
 const displayTextOnScreen = (tag, text) => {
   let field = document.querySelector(tag);
-  field.innerHTML = text
+  field.innerHTML = text;
+};
+
+const cleanInput = () => {
+  document.querySelector('input').value = '';
+}
+
+const addDisabledButton = () => {
+  document.getElementById('reiniciar').setAttribute('disabled', true);
+};
+
+const removeDisableButton = () => {
+  document.getElementById('reiniciar').removeAttribute('disabled');
 };
 
 displayTextOnScreen(title, titleText);
@@ -28,26 +40,28 @@ const kickVerification = () => {
     displayTextOnScreen(paragraph, 'O número digitado é invalido');
   } else {
       if(kick == secretNumber) {
-        let wordAttempt = attempt > 1 ? 'tentativas' : 'tentativa';
-        let attemptMessage = `Parabéns! Você venceu o jogo com ${attempt} ${wordAttempt}`
-        document.querySelector('input').value = '';
-        displayTextOnScreen(paragraph, attemptMessage);
-        randomNumber();
-        document.getElementById('reiniciar').removeAttribute('disabled');
-    } else {
-      if(kick > secretNumber) {
-        displayTextOnScreen(paragraph, `O número secreto é menor que`);
+          let wordAttempt = attempt > 1 ? 'tentativas' : 'tentativa';
+          let attemptMessage = `Parabéns! Você venceu o jogo com ${attempt} ${wordAttempt}`;
+
+          cleanInput();
+          removeDisableButton();
+          displayTextOnScreen(paragraph, attemptMessage);
+          randomNumber(); 
       } else {
-        displayTextOnScreen(paragraph, `O número secreto é maior que`);
-      }
-      attempt++
-  }  
+          if(kick > secretNumber) {
+            displayTextOnScreen(paragraph, `O número secreto é menor que ${kick}`);
+          } else {
+            displayTextOnScreen(paragraph, `O número secreto é maior que ${kick}`);
+          }
+        attempt++;
+        }  
   } 
 };
 
 const newGame = () => {
-  document.querySelector('input').value = '';
-  document.getElementById('reiniciar').setAttribute('disabled', 'disabled')
+  cleanInput();
+  addDisabledButton();
   displayTextOnScreen(paragraph, paragraphText);
   secretNumber = randomNumber(parameterGame);
+  attempt = 1;
 };
