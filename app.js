@@ -1,8 +1,23 @@
+let listNumberSecret = [];
+
 let parameterGame = 10;
 let attempt = 1;
 
 function randomNumber(parameterGame) {
-  return Math.floor(Math.random() * parameterGame + 1);
+  let number = Math.floor(Math.random() * 10 + 1);
+
+  let numberOfElements = listNumberSecret.length;
+
+  if(numberOfElements == parameterGame) {
+    listNumberSecret = [];
+  }
+
+  if(listNumberSecret.includes(number)) {
+    return randomNumber();
+  } else {
+    listNumberSecret.push(number);
+    return number;
+  };
 };
 
 let secretNumber = randomNumber(parameterGame);
@@ -46,7 +61,6 @@ const kickVerification = () => {
           cleanInput();
           removeDisableButton();
           displayTextOnScreen(paragraph, attemptMessage);
-          randomNumber(); 
       } else {
           if(kick > secretNumber) {
             displayTextOnScreen(paragraph, `O número secreto é menor que ${kick}`);
