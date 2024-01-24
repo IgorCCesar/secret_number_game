@@ -31,6 +31,7 @@ const paragraphText = `Escolha um número entre 1 e ${parameterGame}`;
 const displayTextOnScreen = (tag, text) => {
   let field = document.querySelector(tag);
   field.innerHTML = text;
+  responsiveVoice.speak(text, 'Brazilian Portuguese Female', {rate:1.2});
 };
 
 const cleanInput = () => {
